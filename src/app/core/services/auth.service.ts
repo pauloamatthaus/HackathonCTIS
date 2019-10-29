@@ -1,13 +1,26 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase';
-import { User, AuthProvider } from './auth.types';
+import { User, AuthProvider, AuthOptions } from './auth.types';
+import { promise } from 'protractor';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   constructor(private afAuth: AngularFireAuth) {}
+
+  authenticate({ isSignIn, provider, user }: AuthOptions): Promise<auth.UserCredential> {
+    let operation: Promise<auth.UserCredential>;
+
+    if (provider !== AuthProvider.Email) {
+      operation = this.signInWithPopup(provider);
+    } else {
+      operation = isSignIn ? this.signInWithEmail(user) : this.signUpWithEmail(user);
+    }
+
+    return operation;
+  }
 
   private signInWithEmail({ email, password }: User): Promise<auth.UserCredential> {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password);
