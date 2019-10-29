@@ -9,11 +9,48 @@
   </h1>
 
 
+
+
+
+
   <form
     [formGroup]="authForm"
     (submit)="onSubmit()"
   >
+
+
+    <ng-container *ngIf="!configs.isSignIn">
+      <ion-item>
+        <ion-icon
+          name="person"
+          slot="start"
+          class="orange-color"
+        ></ion-icon>
+        <ion-input
+          type="text"
+          placeholder="Nome"
+          formControlName="name"
+        ></ion-input>
+        <ion-note
+          slot="end"
+          color="danger"
+          *ngIf="name.dirty && name.hasError('required')"
+        >
+          Obrigatório
+        </ion-note>
+        <ion-note
+          slot="end"
+          color="danger"
+          *ngIf="name.dirty && name.hasError('minlength')"
+        >
+          Mínimo 3 Caracteres
+        </ion-note>
+      </ion-item>
+    </ng-container>
+
+
     <ion-item>
+
 
 
       <ion-icon
@@ -21,6 +58,8 @@
         slot="start"
         class="orange-color"
       ></ion-icon>
+
+
 
 
 
@@ -36,6 +75,8 @@
 
 
 
+
+
       <ion-note
         slot="end"
         color="danger"
@@ -43,6 +84,8 @@
       >
         Obrigatório
       </ion-note>
+
+
 
 
 
@@ -59,7 +102,9 @@
 
 
 
+
     </ion-item>
+
 
 
 
@@ -71,6 +116,7 @@
         slot="start"
         class="orange-color"
       ></ion-icon>
+
 
 
 
@@ -100,6 +146,7 @@
 
 
 
+
     </ion-item>
     <ion-button
       expand="block"
@@ -107,9 +154,15 @@
       color="danger"
       [disabled]="authForm.invalid"
     >
-      Login
+      {{ configs.action }}
     </ion-button>
   </form>
+
+
+
+
+
+
 
 
 
@@ -119,8 +172,9 @@
     expand="block"
     color="danger"
     fill="clear"
+    (click)="changeAuthAction()"
   >
-    Criar Conta
+    {{ configs.actionChange }}
   </ion-button>
   <ion-button expand="block">
     <ion-icon

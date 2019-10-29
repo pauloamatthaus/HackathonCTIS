@@ -9,6 +9,12 @@ import { TouchSequence } from 'selenium-webdriver';
 })
 export class LoginPage implements OnInit {
   authForm: FormGroup;
+  configs = {
+    isSignIn: true,
+    action: 'Login',
+    actionChange: 'Criar uma conta'
+  };
+  private nameControl = new FormControl(' ', [Validators.required, Validators.minLength(3)]);
 
   constructor(private fb: FormBuilder) {}
 
@@ -22,12 +28,27 @@ export class LoginPage implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
+
+  get name(): FormControl {
+    return this.authForm.get('name') as FormControl;
+  }
+
   get email(): FormControl {
     return this.authForm.get('email') as FormControl;
   }
 
   get password(): FormControl {
     return this.authForm.get('password') as FormControl;
+  }
+
+  changeAuthAction(): void {
+    this.configs.isSignIn = !this.configs.isSignIn;
+    const { isSignIn } = this.configs;
+    this.configs.action = isSignIn ? 'Login' : 'Registrar-se';
+    this.configs.actionChange = isSignIn ? 'Criar uma conta' : 'Ja tenho uma conta';
+    !isSignIn
+      ? this.authForm.addControl('name', this.nameControl)
+      : this.authForm.removeControl('name');
   }
 
   onSubmit(): void {
