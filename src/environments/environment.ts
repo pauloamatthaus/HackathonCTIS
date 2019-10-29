@@ -5,14 +5,14 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: 'AIzaSyAb4ieTa9juuBwIPB0n358821y10FbcZeo',
-    authDomain: 'hackathonctis.firebaseapp.com',
-    databaseURL: 'https://hackathonctis.firebaseio.com',
-    projectId: 'hackathonctis',
-    storageBucket: 'hackathonctis.appspot.com',
-    messagingSenderId: '590738267592',
-    appId: '1:590738267592:web:a7de12b3485afce50b74fd',
-    measurementId: 'G-M3P84E52CB'
+    apiKey: 'AIzaSyCSNorQtlY4VEpjres27g-KTf3ALBqu1W8',
+    authDomain: 'hackathonctis-f4758.firebaseapp.com',
+    databaseURL: 'https://hackathonctis-f4758.firebaseio.com',
+    projectId: 'hackathonctis-f4758',
+    storageBucket: 'hackathonctis-f4758.appspot.com',
+    messagingSenderId: '9143096880',
+    appId: '1:9143096880:web:b11db45a8ab37034947ff5',
+    measurementId: 'G-9WV9H4FBS5'
   }
 };
 
